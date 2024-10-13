@@ -1,36 +1,5 @@
 const router = require('express').Router()
-
-let coffees = [{
-    name: 'Java Jolt',
-    city: 'Seattle',
-    state: 'WA',
-    types: 'Espresso, Latte, Cold Brew',
-    pic: 'https://placekitten.com/250/250'
-}, {
-    name: 'Brewed Awakenings',
-    city: 'Portland',
-    state: 'OR',
-    types: 'Cappuccino, Mocha, Drip Coffee',
-    pic: 'https://placekitten.com/250/250'
-}, {
-    name: 'Cuppa Bliss',
-    city: 'San Francisco',
-    state: 'CA',
-    types: 'Espresso, Americano, Nitro Cold Brew',
-    pic: 'https://placekitten.com/250/250'
-}, {
-    name: 'The Daily Grind',
-    city: 'Austin',
-    state: 'TX',
-    types: 'Latte, Macchiato, French Press',
-    pic: 'https://placekitten.com/250/250'
-}, {
-    name: 'Perk Up Cafe',
-    city: 'New York',
-    state: 'NY',
-    types: 'Cortado, Flat White, Iced Coffee',
-    pic: 'https://placekitten.com/250/250'
-}];
+const coffees = require('..models/coffees.js')
 
 router.get('/', (req, res) => {
     res.render('coffees/index', { coffees })
@@ -42,8 +11,20 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log(req.body)
-    res.send('POST /places')
+    if (!req.body.pic) {
+        // Default image if one is not provided
+        req.body.pic = 'http://placekitten.com/400/400'
+    }
+    if (!req.body.city) {
+        req.body.city = 'Anytown'
+    }
+    if (!req.body.state) {
+        req.body.state = 'USA'
+    }
+    places.push(req.body)
+    res.redirect('/coffees')
 })
+
 
 router.get('/:id', (req, res) => {
     let id = Number(req.params.id)
