@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const coffees = require('..models/coffees.js')
+const coffees = require('../models/coffees.js')
 
 router.get('/', (req, res) => {
     res.render('coffees/index', { coffees })
@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
     if (!req.body.state) {
         req.body.state = 'USA'
     }
-    places.push(req.body)
+    coffees.push(req.body)
     res.redirect('/coffees')
 })
 
