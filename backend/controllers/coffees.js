@@ -32,7 +32,20 @@ router.get('/', (req, res) => {
         types: 'Cortado, Flat White, Iced Coffee',
         pic: 'https://placekitten.com/250/250'
     }];
-    res.render('coffees/index', {coffees})
+    res.render('coffees/index', { coffees })
+})
+
+router.get('/:id', (req, res) => {
+    let id = Number(req.params.id)
+    if (isNaN(id)) {
+        res.render('error404')
+    }
+    else if (!places[id]) {
+        res.render('error404')
+    }
+    else {
+        res.render('places/show', { coffee: coffees[id] })
+    }
 })
 
 module.exports = router
