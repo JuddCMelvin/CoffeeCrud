@@ -9,7 +9,7 @@ function home() {
                 <div>
                     <img src="/images/chia-fruit-drink.jpg" alt="Chia Fruit Shake" />
                 </div>
-                <a href="/coffees">
+                <a href="/places">
                     <button className="btn-primary">Coffee Page</button>
                 </a>
             </main>
